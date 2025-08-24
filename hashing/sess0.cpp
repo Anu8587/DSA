@@ -64,4 +64,42 @@ int main(){
   cout<<minFreq(arr);
 
 }*/
-//----------optimised
+//----------optimised using hash map
+int main(){
+ 
+int n;
+cin>>n;
+int arr[n];
+for(int i = 0;i<n;++i){
+    cin>>arr[i];
+  }
+unordered_map<int,int>hash;
+int maxfreq =0,maxelement = 0;
+int minfreq = n+1, minelement = 0;
+
+for (int i = 0;i<n;i++){
+  if(hash.find(arr[i])==hash.end()){
+    hash[arr[i]] = 1;
+  }else{
+    hash[arr[i]]++;
+  }
+}
+for(auto &p: hash) //iterating over maps
+{
+  int element = p.first;
+  int count = p.second;
+  if (maxfreq <count){
+    maxfreq = count;
+    maxelement = element;
+  }
+  if (minfreq > count){
+    minfreq = count;
+    minelement = element;
+  }
+  
+}
+cout<<maxfreq<<" "<<maxelement<<endl;
+cout<<minfreq<<" "<<minelement;
+
+
+}
